@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Diabetes Risk Form</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Diabetes Risk Assessment</h2>
+
+  <form action="/predict/diabetes" method="POST">
+    <input type="hidden" name="name" value="{{ name }}">
+    <input type="hidden" name="gender" value="{{ gender }}">
+    <input type="hidden" name="age" value="{{ age }}">
+
+    {% if gender == 'female' %}
+      <label for="pregnancies">
+        Pregnancies
+        <span class="tooltip">!
+          <span class="tooltiptext">
+            Number of times you've been pregnant.<br>
+            0 = Never, 1–5 = Normal range<br>
+            >5 may increase diabetes risk
+          </span>
+        </span>
+      </label>
+      <input type="number" name="pregnancies" id="pregnancies" required min="0" max="20"><br>
+    {% else %}
+      <input type="hidden" name="pregnancies" value="0">
+    {% endif %}
+
+    <label for="glucose">
+      Glucose
+      <span class="tooltip">!
+        <span class="tooltiptext">
+          Plasma glucose concentration (mg/dL)<br>
+          Normal: 70–130<br>
+          High risk: >140 (especially fasting)
+        </span>
+      </span>
+    </label>
+    <input type="number" step="0.1" name="glucose" id="glucose" required min="50" max="300"><br>
+
+    <label for="bloodpressure">
+      Blood Pressure
+      <span class="tooltip">!
+        <span class="tooltiptext">
+          Diastolic blood pressure (mm Hg)<br>
+          Normal: 60–80<br>
+          High: >90 may increase risk
+        </span>
+      </span>
+    </label>
+    <input type="number" name="bloodpressure" id="bloodpressure" required min="40" max="150"><br>
+
+    <label for="skinthickness">
+      Skin Thickness
+      <span class="tooltip">!
+        <span class="tooltiptext">
+          Triceps skin fold thickness (mm)<br>
+          Normal: 10–25<br>
+          Low: <10 may indicate underweight<br>
+          High: >35 may indicate fat accumulation
+        </span>
+      </span>
+    </label>
+    <input type="number" name="skinthickness" id="skinthickness" required min="1" max="99"><br>
+
+    <label for="insulin">
+      Insulin
+      <span class="tooltip">!
+        <span class="tooltiptext">
+          2-hour serum insulin (μU/mL)<br>
+          Normal: 16–166<br>
+          Low: <16 may suggest insulin deficiency<br>
+          High: >200 may indicate insulin resistance
+        </span>
+      </span>
+    </label>
+    <input type="number" name="insulin" id="insulin" required min="10" max="900"><br>
+
+    <label for="bmi">
+      BMI
+      <span class="tooltip">!
+        <span class="tooltiptext">
+          Body Mass Index (weight/height²)<br>
+          Normal: 18.5–24.9<br>
+          Overweight: 25–29.9<br>
+          Obese: ≥30
+        </span>
+      </span>
+    </label>
+    <input type="number" step="0.1" name="bmi" id="bmi" required min="10" max="70"><br>
+
+    <label for="diabetespedigreefunction">
+      Diabetes Pedigree Function
+      <span class="tooltip">!
+        <span class="tooltiptext">
+          Family history of diabetes impact score<br>
+          Low: <0.3<br>
+          Moderate: 0.3–0.6<br>
+          High risk: >0.6
+        </span>
+      </span>
+    </label>
+    <input type="number" step="0.001" name="diabetespedigreefunction" id="diabetespedigreefunction" required min="0.0" max="2.5"><br>
+
+    <button type="submit">Predict</button>
+  </form>
+</body>
+</html>

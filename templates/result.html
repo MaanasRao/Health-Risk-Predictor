@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      background-color: #f1f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .result-box {
+      background: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      max-width: 450px;
+      width: 100%;
+    }
+
+    .result-box h2 {
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    .result-box p {
+      font-size: 16px;
+      margin: 10px 0;
+      color: #444;
+    }
+
+    .result-box strong {
+      font-weight: bold;
+      color: #000;
+    }
+
+    .low-risk {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .high-risk {
+      color: #c62828;
+      font-weight: bold;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="result-box">
+    <h2>Prediction Result</h2>
+
+    <p><strong>Name:</strong> {{ name }}</p>
+    <p><strong>Age:</strong> {{ age }}</p>
+    <p><strong>Gender:</strong> {{ gender }}</p>
+    <p><strong>Disease Tested:</strong> {{ disease }}</p>
+    <p><strong>Prediction:</strong>
+      <span class="{% if prediction == 'Low Risk' %}low-risk{% else %}high-risk{% endif %}">
+        {{ prediction }}
+      </span>
+    {% if tips %}
+        <div class="tips-section">
+            <h3>Health Tips Based on Your Inputs:</h3>
+            <ul>
+                {% for tip in tips %}
+                <li>{{ tip }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <p class="disclaimer">{{ disclaimer }}</p>
+    </p>
+
+    <a href="/">Back to Home</a>
+  </div>
+</body>
+</html>

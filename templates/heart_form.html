@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Heart Disease Form</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Heart Disease Risk Form</h2>
+  <form action="/predict/heart" method="POST">
+    <input type="hidden" name="name" value="{{ name }}">
+    <input type="hidden" name="gender" value="{{ gender }}">
+    <input type="hidden" name="age" value="{{ age }}">
+    <input type="hidden" name="sex" value="{% if gender == 'male' %}1{% else %}0{% endif %}">
+
+    <!-- Chest Pain Type -->
+    <label for="cp">
+      Chest Pain Type
+      <span class="tooltip">!
+        <span class="tooltiptext">
+          Type of chest pain experienced:<br>
+          0 = Typical angina<br>
+          1 = Atypical angina<br>
+          2 = Non-anginal pain<br>
+          3 = Asymptomatic<br><br>
+          Higher values (2–3) are associated with higher heart disease risk.
+        </span>
+      </span>
+    </label>
+    <input type="number" name="cp" id="cp" min="0" max="3" required><br>
+
+    <!-- Cholesterol -->
+    <label for="chol">
+      Cholesterol Level
+      <span class="tooltip">!
+        <span class="tooltiptext">
+          Serum cholesterol in mg/dL<br>
+          Normal: &lt; 200<br>
+          Borderline high: 200–239<br>
+          High: ≥ 240 (higher risk)
+        </span>
+      </span>
+    </label>
+    <input type="number" name="chol" id="chol" min="100" max="700" required><br>
+
+    <!-- Slope -->
+    <label for="slope">
+      Slope of ST Segment
+      <span class="tooltip">!
+        <span class="tooltiptext">
+          Slope of peak exercise ST segment:<br>
+          0 = Upsloping (normal)<br>
+          1 = Flat (possible concern)<br>
+          2 = Downsloping (high risk)
+        </span>
+      </span>
+    </label>
+    <input type="number" name="slope" id="slope" min="0" max="2" required><br>
+
+    <button type="submit">Predict</button>
+  </form>
+</body>
+</html>

@@ -8,6 +8,11 @@ A Flask web app that predicts the risk of Diabetes, Heart Disease, and Thyroid D
 - 💡 Personalized health tips
 - 🌐 Flask-powered web interface
 
+## 🔴 Live Demo
+```
+https://health-risk-detector.onrender.com
+```
+
 ## 📁 Project Structure
 ```
 Health Predictor/
